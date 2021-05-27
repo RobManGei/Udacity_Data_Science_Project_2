@@ -50,9 +50,10 @@ It has to be noted that the data is somewhat imbalanced as some labels occur onl
 
 After the data has been loaded, the data is split into a training and a test set using sklearn. Next, a learning pipeline is created. In consists of a CountVectorizer, a TfidfTransformer and a OneVsRestClassifier using a linear SVC estimator. In the CountVectorizer, a message is normalized (lower case, striped, urls removed), lemmatized and tokenized. Afterwads the TfidfTransformer computes the tf-idf for a given token. Finally, the token are classified OneVsRest with a linear SVC. 
 
-This pipeline is used to fit the trining data. Afterwards the model is evaluated using the prediction of the X-test data and the true y_test data. Sci-Kit's classification report fnction is used to score the model. For the given setup, the following figure shows the results. An average f1 score of 0.63 was achieved. It can be seen that catgories with small sample numbers perform very poorly as indicated above.
+This pipeline is used to fit the trining data. Afterwards the model is evaluated using the prediction of the X-test data and the true y_test data. Sci-Kit's classification report fnction is used to score the model. For the given setup, the following figure shows the results. An average f1 score of 0.69 was achieved. It can be seen that catgories with small sample numbers perform very poorly as indicated above.
 
-![image](https://user-images.githubusercontent.com/65665840/119844471-bd35df00-bf08-11eb-91d7-4c25ba953675.png)
+![image](https://user-images.githubusercontent.com/65665840/119846284-4ac5fe80-bf0a-11eb-96f3-ba67c958f24b.png)
+
 
 In the next step, GridSearchCV is used to find improved parameters. Here, mainly the parameters for the CountVectorizer were alterd. Then the model was refitted with the improved parameters and evaluated again. The finalized model was then stored.
 
