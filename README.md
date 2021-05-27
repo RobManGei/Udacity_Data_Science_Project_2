@@ -34,3 +34,8 @@ app/templates/master.html -> HTML file for entering messages
      `python run.py`
 
 3. Go to http://127.0.0.1:3001/
+
+### Description
+Processing the data: The ETL pipeline is pretty straight forward. The data is read from the two .csv files and merged into a pandas dataframe using the 'id'. The data is cleaned afterwards so that the categories become the titles of the columns and there are only integers in the classification. When looking at the data, it was found that there are some '2's in the categories. As we are looking at multi-label classification, these '2's were turned into '1's. Finally, duplicates (by id) were dropped. Finally, the data was saved into a database.
+
+ML pipeline:
