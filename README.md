@@ -54,6 +54,9 @@ This pipeline is used to fit the trining data. Afterwards the model is evaluated
 
 ![image](https://user-images.githubusercontent.com/65665840/119846284-4ac5fe80-bf0a-11eb-96f3-ba67c958f24b.png)
 
+![image](https://user-images.githubusercontent.com/65665840/119907027-aebee600-bf4f-11eb-842c-a4efca14c92c.png)
+
+![image](https://user-images.githubusercontent.com/65665840/119907087-d44bef80-bf4f-11eb-8189-740ff2c562e5.png)
 
 In the next step, GridSearchCV is used to find improved parameters. Here, mainly the parameters for the CountVectorizer were alterd. Then the model was refitted with the improved parameters and evaluated again. The finalized model was then stored.
 
