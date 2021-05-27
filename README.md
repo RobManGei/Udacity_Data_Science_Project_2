@@ -3,15 +3,23 @@ This is my repository for the second project of the data science course. It cont
 
 ### Files:
 data/disaster_messages.csv -> Input file with message text, the columns are: id,message,original,genre
+
 data/disaster_categories.csv -> Input file with massage categories, the columns are: id,categories
+
 data/process_data.py -> Pyhon script to process the input data and store the result in a database. (Input: filepath to messages file, filepath to categories file, database filepath and name to be used; Output: Database with merged and cleaned data)
+
 data/RobsDisasterResponse.db -> Output of process_data.py; Database with merged and cleaned data
 
+
 models/train_classifier.py -> Python script to train a message clssifier and to store the model. (Input: filepath and name of database to be used, filepath for the trained model (name is hardcoded); Output: Prickle file with the trained model
+
 models/robs_finalized_model.pkl -> Output of train_classifier.py; Pickle file with the trained model
 
+
 app/run.py -> Python script to start a webserver that allows entering a message and displays the classification of the message according to the trained model. Warning: The paths and names for the database and the model are hardcoded here.
+
 app/templates/go.html -> HTML file for displaying results
+
 app/templates/master.html -> HTML file for entering messages
 
 ### Instructions:
