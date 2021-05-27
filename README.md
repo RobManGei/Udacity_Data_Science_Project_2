@@ -38,4 +38,13 @@ app/templates/master.html -> HTML file for entering messages
 ### Description
 Processing the data: The ETL pipeline is pretty straight forward. The data is read from the two .csv files and merged into a pandas dataframe using the 'id'. The data is cleaned afterwards so that the categories become the titles of the columns and there are only integers in the classification. When looking at the data, it was found that there are some '2's in the categories. As we are looking at multi-label classification, these '2's were turned into '1's. Finally, duplicates (by id) were dropped. Finally, the data was saved into a database.
 
-ML pipeline:
+ML pipeline: The ML pipeline first loads the data from the database. Then, category columns with only '0's are dropped. This is because they do not add any information to the training set and produce warnings in the later steps. In this dataset, the category 'child_alone' has only '0's and is therefore dropped. The dataset is then split into X (the messages) and y (the category labels) for the further steps. The data was quickly analyzed in terms of categories. The fgure below shows the distribution of labels:
+
+![image](https://user-images.githubusercontent.com/65665840/119840848-9f1aaf80-bf05-11eb-95a7-b407646068e2.png)
+
+It can be seen, that most of the data has no assiged label, many massees have one label assigned and there are some messages with more than 10 labels. The figure below shows the number of occurences for each category:
+
+![image](https://user-images.githubusercontent.com/65665840/119841351-033d7380-bf06-11eb-866e-588a7c75f06f.png)
+
+It has to be noted that the data is somewhat imbalanced as some labels occur only few times.
+
