@@ -46,5 +46,5 @@ It can be seen, that most of the data has no assiged label, many massees have on
 
 ![image](https://user-images.githubusercontent.com/65665840/119841351-033d7380-bf06-11eb-866e-588a7c75f06f.png)
 
-It has to be noted that the data is somewhat imbalanced as some labels occur only few times.
+It has to be noted that the data is somewhat imbalanced as some labels occur only few times. This has an effect on the ML model as those lables are tended to be predicted to be 0 then.
 
