@@ -28,7 +28,7 @@ app/templates/master.html -> HTML file for entering messages
     - To run ETL pipeline that cleans data and stores in database:
      `python ./data/process_data.py ./data/disaster_messages.csv ./data/disaster_categories.csv data/RobsDisasterResponse.db`
     - To run ML pipeline that trains classifier and saves:
-     `python .models/train_classifier.py /data/RobsDisasterResponse.db ./models`
+     `python ./models/train_classifier.py /data/RobsDisasterResponse.db ./models`
 
 2. Run the following command in the app's directory to run your web app:
      `python run.py`
