@@ -30,6 +30,10 @@ def tokenize(text):
 engine = create_engine('sqlite:///../data/RobsDisasterResponse.db')
 df = pd.read_sql_table('RobsMessages', engine)
 
+# dropping columns with all 0 entries as those contain no information for the model
+# this has to be done here, as it is done in the ML pipeline. Otherwise the categories do not match
+df = df.loc[:, (df != 0).any(axis=0)]
+
 # load model
 model = joblib.load("../models/robs_finalized_model.pkl")
 
@@ -41,9 +45,16 @@ def index():
     
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
-    genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
     
+    genre_counts = df.groupby('genre').count()['message']
+    
+    genre_names = list(genre_counts.index)
+    print(genre_names)
+    
+    genre_counts = genre_counts.iloc[:].values
+    print(genre_counts)
+    
+         
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -67,13 +78,14 @@ def index():
         }
     ]
     
+    
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
-
+    
 
 # web page that handles user query and displays model results
 @app.route('/go')
