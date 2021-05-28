@@ -83,7 +83,7 @@ def index():
             'layout': {
                 'title': 'Number of labels identified per message',
                 'yaxis': {
-                    'title': "Number of occurances"
+                    'title': "Number of occurrences"
                 },
                 'xaxis': {
                     'title': "Number of labels for a message"
@@ -99,9 +99,9 @@ def index():
             ],
 
             'layout': {
-                'title': 'Number of occurences per label',
+                'title': 'Number of occurrences per label',
                 'yaxis': {
-                    'title': "Number of occurances"
+                    'title': "Number of occurrences"
                 },
                 'xaxis': {
                     'title': "Label name"
@@ -117,7 +117,7 @@ def index():
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Distribution of message genres',
                 'yaxis': {
                     'title': "Count"
                 },
