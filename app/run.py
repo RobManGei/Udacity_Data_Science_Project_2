@@ -16,6 +16,14 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 def tokenize(text):
+    """This function normalizes, lemmartizes and tokenizes text for ML applications.
+
+    Input:
+    text -- some text to be transformed, e.g. 'This is text'
+    
+    Output:
+    clean_tokens -- clean tokens from the text
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -44,20 +52,63 @@ model = joblib.load("../models/robs_finalized_model.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
-    
+        
+    # prepare data for genre count plot
     genre_counts = df.groupby('genre').count()['message']
-    
     genre_names = list(genre_counts.index)
     print(genre_names)
-    
     genre_counts = genre_counts.iloc[:].values
     print(genre_counts)
     
+    # prepare data for number of labels taged plot
+    rowsums = df.iloc[:,3:].sum(axis=1)
+    y_rowsums=rowsums.value_counts().sort_index()
+    x_rowsums=list(range(0, len(y_rowsums)))
+    
+    # prepare data for number of occurances for a label
+    colsums = df.iloc[:,4:].sum(axis=0)
+    y_colsums = colsums.iloc[:].values
+    x_colsums = colsums.index
          
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
+        {
+            'data': [
+                Bar(
+                    x=x_rowsums,
+                    y=y_rowsums
+                )
+            ],
+
+            'layout': {
+                'title': 'Number of labels identified per message',
+                'yaxis': {
+                    'title': "Number of occurances"
+                },
+                'xaxis': {
+                    'title': "Number of labels for a message"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=x_colsums,
+                    y=y_colsums
+                )
+            ],
+
+            'layout': {
+                'title': 'Number of occurences per label',
+                'yaxis': {
+                    'title': "Number of occurances"
+                },
+                'xaxis': {
+                    'title': "Label name"
+                }
+            }
+        },
         {
             'data': [
                 Bar(
@@ -76,7 +127,7 @@ def index():
                 }
             }
         }
-    ]
+    ]    
     
     
     # encode plotly graphs in JSON
@@ -106,7 +157,7 @@ def go():
 
 
 def main():
-    app.run(host='127.0.0.1', port=3001, debug=True)
+    app.run(host='0.0.0.0', port=3001, debug=True)
 
 
 if __name__ == '__main__':
