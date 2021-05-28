@@ -163,11 +163,11 @@ def save_model(model, model_filepath):
 
 
 def main():
-    """The main function. Tha dara is loaded, data is split into train and test, model is built,
+    """The main function. Tha data is loaded, data is split into train and test, model is built,
     fitted and evaluated. The best parameters are printed out and the model is saved to disk.
 
     Input:
-    none, database_filepath and model_filepath has to be specified
+    none, database_filepath and model_filepath have to be specified
     
     Output:
     none, only saves model to destination

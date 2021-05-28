@@ -5,13 +5,38 @@ from sqlalchemy import create_engine
 import numpy as np
 
 def load_data(messages_filepath, categories_filepath):
+    """This function loads data from two csv files and returns a pandas dataframe.
+
+    Input:
+    messages_filepath -- the filepath to the csv file with the messages
+    categories_filepath -- the filepath to the csv file with the categories
+    
+    Output:
+    df -- a pandas dataframe with the merged data
+    """
+    # read messages
     messages = pd.read_csv(messages_filepath)
+    
+    # read categories
     categories = pd.read_csv(categories_filepath)
+    
+    # merge data in a pandas dataframe
     df = messages.merge(categories, left_on='id', right_on='id', how='outer')
+    
     return df
 
 
 def clean_data(df):
+    """This function cleans the data in a pandas dataframe. Categories are transformed into column names
+    and the category labels are reduced to 0s and 1s and tuned into numeric variables
+
+    Input:
+    df -- a pandas dataframe
+    
+    Output:
+    df -- the cleaned pandas dataframe
+    """
+    
     categories = df["categories"].str.split(';', expand=True)
     # select the first row of the categories dataframe
     row = categories.iloc[0]
@@ -44,12 +69,35 @@ def clean_data(df):
     return df
 
 def save_data(df, database_filename):
+    """This function saves the dataframe to a sql database.
+
+    Input:
+    df -- the pandas dataframe to be saved
+    database_filename -- the file path and name where the database is to be saved
+    
+    Output:
+    none, only saves database to destination
+    """
+    
+    # create vald filename
     database_filename = 'sqlite://' + database_filename
+    
+    # crate an engine
     engine = create_engine(database_filename)
+    
+    # store database
     df.to_sql('RobsMessages', engine, index=False, if_exists='replace')
 
 
 def main():
+    """The main function. Tha data is loaded, cleaned and saved to disk.
+
+    Input:
+    none, messages_filepath, categories_filepath and database_filepath have to be specified
+    
+    Output:
+    none, only saves database to destination
+    """
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
